@@ -1,66 +1,95 @@
+# 📊 Homework 1: Computing IRR
 
-Homework 1: Computing IRR
-Goal
-In this homework, you need to write a function to compute IRR (internal rate of return) given a vector of cash flow and some related parameters.
+## 📌 Overview
+In this homework, you are required to implement a function to compute the **Internal Rate of Return (IRR)** given a cash flow vector and related parameters.
 
-Function prototype
-irr=irrFind(cashFlowVec, cashFlowPeriod, compoundPeriod)
-irr: Internal rate of return
-cashFlowVec: vector of cash flow
-cashFlowPeriod: An integer of period (in month) for cash flow
-compoundPeriod: An integer of period (in month) for compounding, which should be a factor of cashFlowPeriod. (For instance, if cashFlowPeriod=12, compoundPeriod could be 1, 2, 3, 4, 6, 12.)
-Usage examples
-irrFind(cashFlowVec, 12, 12): Yearly payment/collection, yearly compounding
-irrFind(cashFlowVec, 12, 3): Yearly payment/collection, quarterly compounding
-irrFind(cashFlowVec, 12, 1): Yearly payment/collection, monthly compounding
-irrFind(cashFlowVec, 3, 1): quarterly payment/collection, monthly compounding
-Numerical examples
-irrFind([-1234,362,548,481], 12, 12) returns 0.059616
-irrFind([-1234,362,548,481], 12, 1) returns 0.058047
-Test Specs
-I/O format
-Input file specs
-Each line is a test case, with no more than 1,000 lines.
-Each line has n+2 integers (n<20) separated by a space, with the first n integers as cash flow vector, and the last two elements as periods for cash flow and compounding, respectively.
-Main program
-goMain.py (Press right button on the link to download it.)
-Usage: python goMain.py < inputFile > outputFile
-Output specs
-Each line contains a single number of IRR in percentage, with four decimal places
-Example files
-Dataset 1 of 18 cases:
-Input file: input0018open.txt
-Output file: output0018open.txt
-Important facts
-Judge system for "Intro. to Fintech"
-The interest rate is always between -10% and 10%.
-You should try to use the same settings.
-Deadline: [http://mirlab.org/jang/courses/fintech/homework.asp]
-Scoring: Ratio of correctly computed cases in another dataset of 2000 cases.
-Total computing time constraint: 2 sec
-FAQ
-Do I need to upload the main program "goMain.py"?
+---
 
-Ans: No, you only need to upload "irrFind.py" directly, with no compression.
+## 🧮 Function Specification
 
-How to use "goMain.py"?
+```python
+irr = irrFind(cashFlowVec, cashFlowPeriod, compoundPeriod)
+Parameters
+irr: Internal Rate of Return (output)
+cashFlowVec: A list (vector) of cash flows
+cashFlowPeriod: Integer representing the cash flow interval (in months)
+compoundPeriod: Integer representing the compounding interval (in months)
 
-Ans: The main program takes STDIN as input and STDOUT as output.
+⚠️ Note: compoundPeriod must be a factor of cashFlowPeriod
 
-How come the IRR I derived leads to a zero NPV/NFV, but the judge system still thinks the IRR is not correctly?
+Example
+cashFlowPeriod = 12
+compoundPeriod ∈ {1, 2, 3, 4, 6, 12}
+🚀 Usage Examples
+irrFind(cashFlowVec, 12, 12)  # yearly payment, yearly compounding
+irrFind(cashFlowVec, 12, 3)   # yearly payment, quarterly compounding
+irrFind(cashFlowVec, 12, 1)   # yearly payment, monthly compounding
+irrFind(cashFlowVec, 3, 1)    # quarterly payment, monthly compounding
+🔢 Numerical Examples
+irrFind([-1234, 362, 548, 481], 12, 12) -> 0.059616
+irrFind([-1234, 362, 548, 481], 12, 1)  -> 0.058047
+📥 Input / Output Specification
+Input
+Each line represents one test case
+Maximum 1000 lines
+Each line contains:
+n cash flow values (n < 20)
+followed by:
+cashFlowPeriod
+compoundPeriod
+Values are separated by spaces
+Output
+Each line should output one IRR value
+Format:
+Percentage
+Rounded to 4 decimal places
+▶️ Execution
+Main Program
+File: goMain.py
+Run Command
+python goMain.py < inputFile > outputFile
+📁 Example Dataset
+Input: input0018open.txt
+Output: output0018open.txt
+⚠️ Important Notes
+This assignment is part of Intro to Fintech
 
-Ans: There might be several legitimate IRRs (within the right range) for a given test case. As long as your put one of them into the output file, then the case will be considered solved.
+IRR range:
 
-Do you have some hints about solving the NPV/NFV equations?
+-10% ~ 10%
+Use similar settings when solving
+⏰ Deadline
 
-Ans: You can use either fsolve() or roots().
+http://mirlab.org/jang/courses/fintech/homework.asp
 
-fsolve() can only find a root at a time. (Since IRR is usually a small number, you can set the initial guess as 0.)
-roots() can find all the roots simultaneously.
-References
-Root Finding
+🏆 Scoring
+Based on correctness over 2000 test cases
+Score = ratio of correct answers
+⏱️ Time Constraint
+Total runtime limit: 2 seconds
+❓ FAQ
+Do I need to upload goMain.py?
+
+No.
+Only upload irrFind.py (no compression required).
+
+How does goMain.py work?
+Reads input from STDIN
+Writes output to STDOUT
+Why is my IRR marked incorrect even when NPV/NFV = 0?
+Some cases have multiple valid IRRs
+As long as your result is valid, it should be accepted
+Any hints for solving IRR?
+
+You can use root-finding methods:
+
+fsolve() → finds one root
+roots() → finds all roots
+
+💡 Tip: Use 0 as the initial guess since IRR is usually small
+
+📚 References
 Root Finding in Python
 fsolve
-Course material on youtube
-Compounding
-IRR
+Course materials (YouTube)
+Compounding & IRR theory
