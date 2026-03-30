@@ -1,5 +1,5 @@
 
-##Homework 1: Computing IRR
+Homework 1: Computing IRR
 Goal
 In this homework, you need to write a function to compute IRR (internal rate of return) given a vector of cash flow and some related parameters.
 
